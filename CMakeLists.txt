@@ -4,6 +4,7 @@ project(data_structures VERSION 0.1)
 
 add_executable(data_structures_tester
     src/main.c
+    src/linked_list.c
 )
 
 target_include_directories(
