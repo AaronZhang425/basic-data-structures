@@ -7,7 +7,7 @@ struct linked_list_node {
 };
 
 struct linked_list {
-    struct linked_list *head;
+    struct linked_list_node *head;
     uint16_t size;
 };
 
