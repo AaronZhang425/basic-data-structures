@@ -78,3 +78,17 @@ int append_node(struct linked_list *linked_list, void *data, size_t size) {
     return 0;
 
 }
+
+void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
+    uint32_t current_index = 0;
+    struct linked_list_node *node = linked_list->head;
+
+    while (node && current_index < target_index) {
+        node = node->next_node;
+        current_index++;    
+
+    }
+    
+    return node ? node->data : NULL;
+
+}
