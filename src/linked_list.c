@@ -53,7 +53,14 @@ void destory_linked_list(struct linked_list *linked_list) {
 
 }
 
-int append_node(struct linked_list *linked_list, void *data, size_t size) {
+// Free the node in the heap and the data
+void destroy_linked_list_node_full(struct linked_list_node *node) {
+    free(node->data);
+    free(node);
+
+}
+
+int linked_list_append(struct linked_list *linked_list, void *data, size_t size) {
     struct linked_list_node *new_node = calloc(
         1,
         sizeof(struct linked_list_node)
@@ -75,11 +82,22 @@ int append_node(struct linked_list *linked_list, void *data, size_t size) {
 
     final_node->next_node = new_node;
 
+    linked_list->size++;
+
     return 0;
 
 }
 
 void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
+    if (
+        target_index < 0
+        || target_index >= linked_list->size
+        || !linked_list->size
+    ) {
+        return NULL;
+
+    }
+    
     uint32_t current_index = 0;
     struct linked_list_node *node = linked_list->head;
 
@@ -90,5 +108,31 @@ void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
     }
     
     return node ? node->data : NULL;
+
+}
+
+void linked_list_remove(struct linked_list *linked_list, int32_t target_index) {
+    if (target_index < 0 || target_index >= linked_list->size) {
+        return;
+
+    }
+
+    struct linked_list_node **node = &(linked_list->head);
+    struct linked_list_node *removed_node;
+    
+    int32_t current_index = 0;
+
+    while ((*node) && current_index < target_index) {
+        node = &((*node)->next_node);
+        current_index++;
+
+    }
+
+    removed_node = (*node);
+    *node = removed_node->next_node;
+
+    destroy_linked_list_node_full(removed_node);
+
+    linked_list->size--;
 
 }
