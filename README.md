@@ -1,0 +1,1 @@
+Some basic implementations of basic data structures in C as an exercise
