@@ -60,20 +60,24 @@ void destroy_linked_list_node_full(struct linked_list_node *node) {
 
 }
 
-int linked_list_append(struct linked_list *linked_list, void *data, size_t size) {
+int linked_list_append(
+    struct linked_list *linked_list,
+    void *data,
+    size_t data_size
+) {
     struct linked_list_node *new_node = calloc(
         1,
         sizeof(struct linked_list_node)
     );
 
-    void *data_copy = calloc(1, size);
+    void *data_copy = calloc(1, data_size);
 
     if (!data_copy) {
         return -1;
 
     }
 
-    memcpy(data_copy, data, size);
+    memcpy(data_copy, data, data_size);
 
     new_node->data = data_copy;
     new_node->next_node = NULL;
@@ -111,16 +115,16 @@ void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
 
 }
 
-void linked_list_remove(struct linked_list *linked_list, int32_t target_index) {
-    if (target_index < 0 || target_index >= linked_list->size) {
+void linked_list_remove(struct linked_list *linked_list, uint32_t target_index) {
+    if (target_index >= linked_list->size) {
         return;
 
     }
 
     struct linked_list_node **node = &(linked_list->head);
     struct linked_list_node *removed_node;
-    
-    int32_t current_index = 0;
+
+    uint32_t current_index = 0;
 
     while ((*node) && current_index < target_index) {
         node = &((*node)->next_node);
@@ -134,5 +138,51 @@ void linked_list_remove(struct linked_list *linked_list, int32_t target_index) {
     destroy_linked_list_node_full(removed_node);
 
     linked_list->size--;
+
+}
+
+int linked_list_add(
+    struct linked_list *linked_list,
+    uint32_t target_index,
+    void *data,
+    size_t data_size
+) {
+    if (target_index > linked_list->size) {
+        return -1;
+
+    }
+
+    void *data_copy = calloc(1, data_size);
+
+    if (!data_copy) {
+        return -1;
+
+    }
+
+    memcpy(data_copy, data, data_size);
+
+    struct linked_list_node *new_node = calloc(
+        1,
+        sizeof(struct linked_list_node)
+    );
+
+    new_node->data = data_copy;
+
+    struct linked_list_node **node = &(linked_list->head);
+
+    uint32_t current_index = 0; 
+    
+    while ((*node) && current_index < target_index) {
+        node = &((*node)->next_node);
+        current_index++;
+            
+    }
+
+    new_node->next_node = *node;
+    *node = new_node;
+    
+    linked_list->size++;
+
+    return 0;
 
 }
