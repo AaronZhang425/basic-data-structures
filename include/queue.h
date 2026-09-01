@@ -12,4 +12,10 @@ struct queue {
     uint16_t size;
 };
 
+struct queue *new_queue();
+void destroy_queue(struct queue *queue);
+void destroy_queue_node_full(struct queue_node *queue);
+int queue_add(struct queue *queue, void *data, size_t size);
+struct queue_node *queue_poll(struct queue *queue);
+
 #endif
