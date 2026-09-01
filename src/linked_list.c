@@ -17,17 +17,9 @@ struct linked_list_node *get_last_node(struct linked_list *linked_list) {
 
 }
 
-int new_link_list(struct linked_list **linked_list) {
-    struct linked_list *new_link_list = calloc(1, sizeof(struct linked_list));
-    
-    if (!new_link_list) {
-        return -1;
-
-    }
-
-    *linked_list = new_link_list;
-    
-    return 0;
+struct linked_list *new_linked_list() {
+    struct linked_list *new_linked_list = calloc(1, sizeof(struct linked_list));
+    return new_linked_list;
 
 }
 
@@ -45,10 +37,11 @@ void destory_linked_list(struct linked_list *linked_list) {
         
         working_node = next_node;
         
-        next_node = working_node->next_node;
+        next_node = next_node->next_node;
 
     }
 
+    free(working_node->data);
     free(working_node);
 
 }

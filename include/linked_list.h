@@ -13,7 +13,7 @@ struct linked_list {
 
 struct linked_list_node *get_last_node(struct linked_list *linked_list);
 
-int new_link_list(struct linked_list **linked_list);
+struct linked_list *new_linked_list();
 
 void destory_linked_list(struct linked_list *linked_list);
 
