@@ -13,6 +13,13 @@ struct queue *new_queue() {
 
 void destroy_queue(struct queue *queue) {
     struct queue_node *working_node = queue->head;
+    
+    if (!working_node) {
+        free(queue);
+        return;
+
+    }
+    
     struct queue_node *next_node = working_node->next_node;
 
     free(queue);
@@ -48,6 +55,7 @@ int queue_add(struct queue *queue, void *data, size_t size) {
     void *data_copy = calloc(1, size);
 
     if (!data_copy) {
+        free(new_node);
         return -1;
 
     }
@@ -55,6 +63,16 @@ int queue_add(struct queue *queue, void *data, size_t size) {
     memcpy(data_copy, data, size);
 
     new_node->data = data_copy;
+
+    queue->size++;
+
+    // If queue is empty
+    if (!(queue->tail)) {
+        queue->tail = new_node;
+        queue->head = new_node;
+        return 0;
+
+    }
 
     queue->tail->next_node = new_node;
     queue->tail = new_node;
@@ -71,8 +89,15 @@ struct queue_node *queue_poll(struct queue *queue) {
     struct queue_node *old_head = queue->head;
     queue->head = old_head->next_node;
     
+    if (!(queue->head)) {
+        queue->tail = NULL;
+
+    }
+
     // Detach old head
     old_head->next_node = NULL;
+
+    queue->size--;
 
     return old_head;
 
