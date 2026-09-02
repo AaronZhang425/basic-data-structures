@@ -26,6 +26,8 @@ struct linked_list *new_linked_list() {
 // Also frees the data pointer.
 void destory_linked_list(struct linked_list *linked_list) {
     struct linked_list_node *working_node = linked_list->head;
+
+    // NEED TO CHECK FOR NULL
     struct linked_list_node *next_node = working_node->next_node;
 
     free(linked_list);
@@ -63,9 +65,15 @@ int linked_list_append(
         sizeof(struct linked_list_node)
     );
 
+    if (!new_node) {
+        return -1;
+
+    }
+
     void *data_copy = calloc(1, data_size);
 
     if (!data_copy) {
+        free(new_node);
         return -1;
 
     }
@@ -145,19 +153,25 @@ int linked_list_add(
 
     }
 
+    struct linked_list_node *new_node = calloc(
+        1,
+        sizeof(struct linked_list_node)
+    );
+
+    if (!new_node) {
+        return -1;
+
+    }
+
     void *data_copy = calloc(1, data_size);
 
     if (!data_copy) {
+        free(new_node);
         return -1;
 
     }
 
     memcpy(data_copy, data, data_size);
-
-    struct linked_list_node *new_node = calloc(
-        1,
-        sizeof(struct linked_list_node)
-    );
 
     new_node->data = data_copy;
 
