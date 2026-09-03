@@ -24,7 +24,7 @@ struct linked_list *new_linked_list() {
 }
 
 // Also frees the data pointer.
-void destory_linked_list(struct linked_list *linked_list) {
+void destroy_linked_list(struct linked_list *linked_list) {
     struct linked_list_node *working_node = linked_list->head;
     
     free(linked_list);
@@ -100,8 +100,7 @@ int linked_list_append(
 
 void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
     if (
-        target_index < 0
-        || target_index >= linked_list->size
+        target_index >= linked_list->size
         || !linked_list->size
     ) {
         return NULL;
