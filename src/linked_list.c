@@ -26,12 +26,17 @@ struct linked_list *new_linked_list() {
 // Also frees the data pointer.
 void destory_linked_list(struct linked_list *linked_list) {
     struct linked_list_node *working_node = linked_list->head;
-
-    // NEED TO CHECK FOR NULL
-    struct linked_list_node *next_node = working_node->next_node;
-
+    
     free(linked_list);
     linked_list = NULL;
+
+    if (!working_node) {
+        return;
+
+    }
+
+    struct linked_list_node *next_node = working_node->next_node;
+
 
     while (next_node) {
         free(working_node->data);
