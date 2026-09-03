@@ -15,7 +15,7 @@ struct linked_list_node *get_last_node(struct linked_list *linked_list);
 
 struct linked_list *new_linked_list();
 
-void destory_linked_list(struct linked_list *linked_list);
+void destroy_linked_list(struct linked_list *linked_list);
 
 void destroy_linked_list_node_full(struct linked_list_node *node);
 
