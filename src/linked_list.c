@@ -6,9 +6,14 @@
 #include "linked_list.h"
 
 struct linked_list_node *get_last_node(struct linked_list *linked_list) {
-    struct linked_list_node *node = linked_list->head->next_node;
+    if (!linked_list->head) {
+        return NULL;
 
-    while (node) {
+    }
+
+    struct linked_list_node *node = linked_list->head;
+
+    while (node->next_node) {
         node = node->next_node;
 
     }
@@ -90,7 +95,13 @@ int linked_list_append(
 
     struct linked_list_node *final_node = get_last_node(linked_list);
 
-    final_node->next_node = new_node;
+    if (final_node) {
+        final_node->next_node = new_node;
+
+    } else {
+        linked_list->head = new_node;
+
+    }
 
     linked_list->size++;
 
