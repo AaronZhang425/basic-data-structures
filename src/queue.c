@@ -69,8 +69,6 @@ int queue_add(struct queue *queue, void *data, size_t size) {
 
     new_node->data = data_copy;
 
-    queue->size++;
-
     // If queue is empty
     if (!(queue->tail)) {
         queue->tail = new_node;
