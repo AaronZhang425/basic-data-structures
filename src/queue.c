@@ -5,7 +5,7 @@
 
 #include "queue.h"
 
-struct queue *new_queue() {
+struct queue *new_queue(void) {
     struct queue *new_queue = calloc(1, sizeof(struct queue));
     return new_queue;
 

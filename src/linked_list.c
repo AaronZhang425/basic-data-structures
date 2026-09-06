@@ -22,7 +22,7 @@ struct linked_list_node *get_last_node(struct linked_list *linked_list) {
 
 }
 
-struct linked_list *new_linked_list() {
+struct linked_list *new_linked_list(void) {
     struct linked_list *new_linked_list = calloc(1, sizeof(struct linked_list));
     return new_linked_list;
 
