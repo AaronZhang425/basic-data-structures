@@ -45,6 +45,11 @@ void destroy_queue_node_full(struct queue_node *queue) {
 }
 
 int queue_add(struct queue *queue, void *data, size_t size) {
+    if (queue->size >= MAX_QUEUE_SIZE) {
+        return;
+
+    }
+
     struct queue_node *new_node = calloc(1, sizeof(struct queue_node));
     
     if (!new_node) {
@@ -76,6 +81,8 @@ int queue_add(struct queue *queue, void *data, size_t size) {
 
     queue->tail->next_node = new_node;
     queue->tail = new_node;
+
+    queue->size++;
 
     return 0;
 }

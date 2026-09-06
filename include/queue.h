@@ -1,6 +1,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
+#define MAX_QUEUE_SIZE 100
+
 struct queue_node{
     void *data;
     struct queue_node *next_node;
