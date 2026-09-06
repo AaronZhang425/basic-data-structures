@@ -46,7 +46,7 @@ void destroy_queue_node_full(struct queue_node *queue) {
 
 int queue_add(struct queue *queue, void *data, size_t size) {
     if (queue->size >= MAX_QUEUE_SIZE) {
-        return;
+        return -1;
 
     }
 
