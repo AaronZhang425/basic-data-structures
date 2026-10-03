@@ -6,6 +6,8 @@ add_executable(data_structures_tester
     src/main.c
     src/linked_list.c
     src/queue.c
+    src/doubly_linked_list.c
+    src/deque.c
 )
 
 target_include_directories(
