@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "doubly_linked_list.h"
 
@@ -53,15 +54,28 @@ int add(
 
     }
 
-    struct doubly_linked_list_node **current_node = &list->head;
-    uint32_t current_index = 0;
+    memcpy(data_copy, data, data_size);
 
-    while(current_index < target_index) {
-        // TODO: implement adding the new node
+    new_node->data = data_copy;
 
-        current_index++;
+    // struct doubly_linked_list_node **current_node = &list->head;
+    // uint32_t current_index = 0;
 
-    }
+    // while(*current_node && current_index < target_index) {
+    //     // TODO: implement adding the new node
+    //     current_node = &((*current_node)->next); 
+
+    //     current_index++;
+
+    // }
+
+    // new_node->next = (*current_node);
+    // (*current_node)->prev = new_node;
+
+    // *current_node = new_node;
+    // new_node->prev = *current_node;
+
+    // (*current_node)->next = new_node;
 
     list->size++;
 
