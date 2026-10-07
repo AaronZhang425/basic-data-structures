@@ -58,27 +58,31 @@ int add(
 
     new_node->data = data_copy;
 
-    // struct doubly_linked_list_node **current_node = &list->head;
-    // uint32_t current_index = 0;
+    struct doubly_linked_list_node *current_node = list->head;
+    struct doubly_linked_list_node *prev_node = NULL;
 
-    // while(*current_node && current_index < target_index) {
-    //     // TODO: implement adding the new node
-    //     current_node = &((*current_node)->next); 
+    uint32_t current_index = 0;
 
-    //     current_index++;
+    while (!current_node && current_index < target_index) {
+        prev_node = current_node;
+        current_node = current_node->next;
+        current_index++;
 
-    // }
+    }
 
-    // new_node->next = (*current_node);
-    // (*current_node)->prev = new_node;
+    if (!current_node) {
+        list->head = new_node;
+        new_node->prev = NULL;
 
-    // *current_node = new_node;
-    // new_node->prev = *current_node;
+    } else {
+        prev_node->next = new_node;
+        new_node->prev = prev_node;
 
-    // (*current_node)->next = new_node;
+        current_node->prev = new_node;
+        new_node->next = current_node;
 
-    list->size++;
-
+    }
+    
     return 0;
 
 }
