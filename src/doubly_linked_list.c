@@ -25,12 +25,24 @@ void destory_doubly_linked_list(struct doubly_linked_list *list) {
 
 }
 
-// TODO: Implement
 void *doubly_linked_list_get(
     struct doubly_linked_list *list,
     uint16_t target_index
 ) {
-    return NULL;
+    if (target_index >= list->size) {
+        return NULL;
+
+    }
+
+    struct doubly_linked_list_node *node = list->head;
+
+    for (uint16_t index = 0; index < target_index && node; index++) {
+        node = node->next;
+
+    }
+
+
+    return node->data;
 
 }
 
