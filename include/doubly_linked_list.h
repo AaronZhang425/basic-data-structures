@@ -15,9 +15,9 @@ struct doubly_linked_list {
 
 struct doubly_linked_list *new_doubly_linked_list();
 void destory_doubly_linked_list(struct doubly_linked_list *list);
-int add(
+int doubly_linked_list_add(
     struct doubly_linked_list *list,
-    uint32_t target_index,
+    uint16_t target_index,
     void *data,
     size_t data_size
 );
