@@ -109,7 +109,7 @@ int linked_list_append(
 
 }
 
-void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
+void *linked_list_get(struct linked_list *linked_list, uint16_t target_index) {
     if (
         target_index >= linked_list->size
         || !linked_list->size
@@ -131,7 +131,7 @@ void *linked_list_get(struct linked_list *linked_list, uint32_t target_index) {
 
 }
 
-void linked_list_remove(struct linked_list *linked_list, uint32_t target_index) {
+void linked_list_remove(struct linked_list *linked_list, uint16_t target_index) {
     if (target_index >= linked_list->size) {
         return;
 
@@ -159,7 +159,7 @@ void linked_list_remove(struct linked_list *linked_list, uint32_t target_index) 
 
 int linked_list_add(
     struct linked_list *linked_list,
-    uint32_t target_index,
+    uint16_t target_index,
     void *data,
     size_t data_size
 ) {

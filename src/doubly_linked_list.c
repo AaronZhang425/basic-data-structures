@@ -5,7 +5,7 @@
 
 #include "doubly_linked_list.h"
 
-struct doubly_linked_list *new_doubly_linked_list() {
+struct doubly_linked_list *new_doubly_linked_list(void) {
     return calloc(1, sizeof(struct doubly_linked_list));
 
 }
@@ -25,9 +25,18 @@ void destory_doubly_linked_list(struct doubly_linked_list *list) {
 
 }
 
-int add(
+// TODO: Implement
+void *doubly_linked_list_get(
     struct doubly_linked_list *list,
-    uint32_t target_index,
+    uint16_t target_index
+) {
+    return NULL;
+
+}
+
+int doubly_linked_list_add(
+    struct doubly_linked_list *list,
+    uint16_t target_index,
     void *data,
     size_t data_size
 ) {
@@ -70,6 +79,8 @@ int add(
 
     }
 
+    // TODO: Handle adding to the very end
+
     if (!current_node) {
         list->head = new_node;
         new_node->prev = NULL;
@@ -82,7 +93,17 @@ int add(
         new_node->next = current_node;
 
     }
-    
+
+    list->size++;
+
     return 0;
+
+}
+
+int doubly_linked_list_remove(
+    struct doubly_linked_list *list,
+    uint16_t index
+) {
+    
 
 }
