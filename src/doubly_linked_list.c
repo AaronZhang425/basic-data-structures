@@ -25,6 +25,14 @@ void destory_doubly_linked_list(struct doubly_linked_list *list) {
 
 }
 
+static void destroy_doubly_linked_list_node_full(
+    struct doubly_linked_list_node* node
+) {
+    free(node->data);
+    free(node);
+
+}
+
 void *doubly_linked_list_get(
     struct doubly_linked_list *list,
     uint16_t target_index
@@ -82,7 +90,7 @@ int doubly_linked_list_add(
     struct doubly_linked_list_node *current_node = list->head;
     struct doubly_linked_list_node *prev_node = NULL;
 
-    uint32_t current_index = 0;
+    uint16_t current_index = 0;
 
     while (!current_node && current_index < target_index) {
         prev_node = current_node;
@@ -117,10 +125,25 @@ int doubly_linked_list_remove(
     struct doubly_linked_list *list,
     uint16_t target_index
 ) {
-    if (target_index >= index) {
+    if (target_index >= list->size) {
         return -1;
 
     }
+
+    struct doubly_linked_list_node *prev = NULL;
+    struct doubly_linked_list_node *current = list->head;
+
+    for (
+        uint16_t current_index = 0;
+        current_index < target_index && current;
+        current_index++
+    ) {
+        prev = current;
+        current = current->next;
+
+    }
+
+    // TODO: Delete node and change pointers
 
     return 0;
 
