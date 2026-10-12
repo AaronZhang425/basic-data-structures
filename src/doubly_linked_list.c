@@ -143,7 +143,12 @@ int doubly_linked_list_remove(
 
     }
 
-    // TODO: Delete node and change pointers
+    prev->next = current->next;
+    current->next = prev;
+
+    destroy_doubly_linked_list_node_full(current);
+
+    list->size--;
 
     return 0;
 
