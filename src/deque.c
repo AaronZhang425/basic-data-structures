@@ -4,9 +4,8 @@
 
 #include "deque.h"
 
-// TODO: Implement
 struct deque *new_deque(void) {
-    return NULL;
+    return calloc(1, sizeof(struct deque));
 
 }
 
@@ -15,25 +14,32 @@ void destory_deque(struct deque *deque) {
 
 }
 
-// TODO: Implement
-int add_to_head_deque() {
-    return 0;
+void destory_deque_node_full(struct deque_node *list) {
+    free(list->data);
+    free(list);
+
 }
 
 // TODO: Implement
-void *poll_head_deque() {
+int add_to_head_deque(struct deque *list, void *data, size_t data_size) {
+    return 0;
+
+}
+
+// TODO: Implement
+void *poll_head_deque(struct deque *list) {
     return NULL;
 
 }
 
 // TODO: Implement
-int add_to_tail_deque() {
+int add_to_tail_deque(struct deque *list, void *data, size_t data_size) {
     return 0;
 
 }
 
 // TODO: Implement
-void *poll_tail_deque() {
+void *poll_tail_deque(struct deque *list) {
     return NULL;
 
 }
