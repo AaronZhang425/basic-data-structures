@@ -21,7 +21,6 @@ void destory_deque_node_full(struct deque_node *list) {
 
 }
 
-// TODO: Implement
 int add_to_head_deque(struct deque *list, void *data, size_t data_size) {
     struct deque_node *new_node = calloc(1, sizeof(struct deque_node));
 
@@ -62,12 +61,31 @@ int add_to_head_deque(struct deque *list, void *data, size_t data_size) {
 }
 
 // TODO: Implement
-void *poll_head_deque(struct deque *list) {
-    return NULL;
+struct deque_node *poll_head_deque(struct deque *list) {
+    // Guard for if deqeue is empty
+    if (!list->head) {
+        return NULL;
+
+    }
+
+    struct deque_node *old_head = list->head;
+    list->head = list->head->next;
+
+    // Disconnect the node from the rest of the deque
+    old_head->next = NULL;
+
+    list->size--;
+
+    // If deqeue is now empty
+    if (!list->head) {
+        list->tail = NULL;
+
+    }
+
+    return old_head;
 
 }
 
-// TODO: Implement
 int add_to_tail_deque(struct deque *list, void *data, size_t data_size) {
     struct deque_node *new_node = calloc(1, sizeof(struct deque_node));
 
