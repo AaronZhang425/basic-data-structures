@@ -11,7 +11,30 @@ struct deque *new_deque(void) {
 }
 
 // TODO: Implement
-void destory_deque(struct deque *deque) {
+void destory_deque(struct deque *list) {
+    if (!list) {
+        return;
+
+    }
+
+    if (!list->head) {
+        free(list);
+        return;
+
+    }
+
+    struct deque_node *current = list->head;
+    struct deque_node *prev = NULL;
+
+    while (current) {
+        prev = current;
+        current = current->next;
+
+        free(prev);
+
+    }
+
+    free(list);
 
 }
 
