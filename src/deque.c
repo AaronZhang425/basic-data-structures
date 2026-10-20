@@ -10,7 +10,6 @@ struct deque *new_deque(void) {
 
 }
 
-// TODO: Implement
 void destory_deque(struct deque *list) {
     if (!list) {
         return;
@@ -83,8 +82,12 @@ int add_to_head_deque(struct deque *list, void *data, size_t data_size) {
 
 }
 
-// TODO: Implement
 struct deque_node *poll_head_deque(struct deque *list) {
+    if (!list) {
+        return NULL;
+
+    }
+    
     // Guard for if deqeue is empty
     if (!list->head) {
         return NULL;
@@ -92,18 +95,18 @@ struct deque_node *poll_head_deque(struct deque *list) {
     }
 
     struct deque_node *old_head = list->head;
-    list->head = list->head->next;
-
+    list->head = old_head->next;
+    
+    // If deqeue is now empty    
+    if (!list->head) {
+        list->tail = NULL;
+        
+    }
+    
     // Disconnect the node from the rest of the deque
     old_head->next = NULL;
 
     list->size--;
-
-    // If deqeue is now empty
-    if (!list->head) {
-        list->tail = NULL;
-
-    }
 
     return old_head;
 
@@ -148,8 +151,32 @@ int add_to_tail_deque(struct deque *list, void *data, size_t data_size) {
 
 }
 
-// TODO: Implement
-void *poll_tail_deque(struct deque *list) {
-    return NULL;
+struct deque_node *poll_tail_deque(struct deque *list) {
+    if (!list) {
+        return NULL;
+
+    }
+    
+    if (!list->tail) {
+        return NULL;
+
+    }
+
+    struct deque_node *old_tail = list->tail;
+    
+    old_tail->tail = old_tail->prev;
+
+    if (!list->tail) {
+        list->head = NULL;
+
+    }
+
+    // Disconnect the polled node from the rest of the deque
+    old_tail->prev = NULL;
+    
+    // Update the size of the list
+    list->size--;
+
+    return old_tail;
 
 }

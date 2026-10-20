@@ -121,7 +121,6 @@ int doubly_linked_list_add(
 
 }
 
-// TODO: Implement
 int doubly_linked_list_remove(
     struct doubly_linked_list *list,
     uint16_t target_index
