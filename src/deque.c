@@ -164,7 +164,7 @@ struct deque_node *poll_tail_deque(struct deque *list) {
 
     struct deque_node *old_tail = list->tail;
     
-    old_tail->tail = old_tail->prev;
+    list->tail = old_tail->prev;
 
     if (!list->tail) {
         list->head = NULL;
