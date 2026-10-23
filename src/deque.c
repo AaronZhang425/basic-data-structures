@@ -10,7 +10,7 @@ struct deque *new_deque(void) {
 
 }
 
-void destory_deque(struct deque *list) {
+void destroy_deque(struct deque *list) {
     if (!list) {
         return;
 
@@ -30,6 +30,7 @@ void destory_deque(struct deque *list) {
         current = current->next;
 
         free(prev);
+        free(prev->data);
 
     }
 
@@ -37,13 +38,23 @@ void destory_deque(struct deque *list) {
 
 }
 
-void destory_deque_node_full(struct deque_node *list) {
+void destroy_deque_node_full(struct deque_node *list) {
+    if (!list) {
+        return;
+
+    }
+
     free(list->data);
     free(list);
 
 }
 
 int add_to_head_deque(struct deque *list, void *data, size_t data_size) {
+    if (!list) {
+        return -1;
+
+    }
+
     struct deque_node *new_node = calloc(1, sizeof(struct deque_node));
 
     if (!new_node) {
@@ -113,6 +124,11 @@ struct deque_node *poll_head_deque(struct deque *list) {
 }
 
 int add_to_tail_deque(struct deque *list, void *data, size_t data_size) {
+    if (!list) {
+        return -1;
+
+    }
+
     struct deque_node *new_node = calloc(1, sizeof(struct deque_node));
 
     if (!new_node) {
